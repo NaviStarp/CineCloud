@@ -1,0 +1,75 @@
+site_name: Cinecloud
+site_description: Documentación de la plataforma Cinecloud
+site_author: Iván Prats
+
+# Tema y apariencia
+theme:
+  name: material
+  language: es
+  logo: assets/Logo.png     # ✅ Imagen como logo
+  favicon: assets/favicon.ico
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+# Navegación
+nav:
+  - Inicio: index.md
+  - Backend:
+      - Introducción: backend.md
+  - Frontend:
+      - Introducción: frontend.md
+  - Problemas comunes: problemas.md
+  - Recursos adicionales: recursos.md
+
+# Extensiones de Markdown
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+# Plugins
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+# Archivos adicionales
+extra_css:
+  - stylesheets/extra.css
+
+# Configuración del repositorio (descomentar si se usa GitHub)
+# repo_name: cinecloud
+# repo_url: https://github.com/cinecloud/docs
+
