@@ -6,7 +6,7 @@ site_author: Iván Prats
 theme:
   name: material
   language: es
-  logo: assets/Logo.png     # ✅ Imagen como logo
+  logo: assets/Logo.png     
   favicon: assets/favicon.ico
   features:
     - navigation.tabs
@@ -36,11 +36,12 @@ theme:
 nav:
   - Inicio: index.md
   - Backend:
-      - Introducción: backend.md
+      - Introducción: backend/index.md
+      - Instalación: backend/instalacion.md
+      - Arquitectura: backend/arquitectura.md
   - Frontend:
-      - Introducción: frontend.md
-  - Problemas comunes: problemas.md
-  - Recursos adicionales: recursos.md
+      - Introducción: frontend/index.md
+      - Instalación: frontend/instalacion.md
 
 # Extensiones de Markdown
 markdown_extensions:
@@ -55,6 +56,11 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
@@ -62,8 +68,11 @@ markdown_extensions:
 # Plugins
 plugins:
   - search
+  - mermaid2
   - minify:
       minify_html: true
+extra:
+  generator: false
 
 # Archivos adicionales
 extra_css:
