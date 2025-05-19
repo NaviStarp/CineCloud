@@ -18,9 +18,9 @@ La arquitectura de Cinecloud Backend sigue un diseño modular basado en aplicaci
 │   ├── urls.py         # URLs del proyecto
 │   ├── views.py        # Vistas generales
 │   └── wsgi.py         # Configuración WSGI
-├── movies              # Aplicación para gestión de películas
+├── Peliculas              # Aplicación para gestión de películas
 ├── series              # Aplicación para gestión de series
-├── users               # Aplicación para gestión de usuarios
+├── Usuarios               # Aplicación para gestión de usuarios
 ├── database            # Configuración de base de datos
 ├── manage.py           # Script de administración de Django
 ├── requirements.txt    # Dependencias del proyecto
@@ -43,7 +43,7 @@ La aplicación principal que coordina todas las funcionalidades del sistema:
 
 ### Aplicaciones específicas
 
-#### Movies
+#### Peliculas
 
 Gestiona todo lo relacionado con películas:
 
@@ -54,13 +54,13 @@ Gestiona todo lo relacionado con películas:
 
 #### Series
 
-Similar a Movies, pero con estructuras adicionales:
+Similar a Peliculas, pero con estructuras adicionales:
 
 - Gestión de temporadas
 - Gestión de episodios
 - Relaciones entre temporadas y series
 
-#### Users
+#### Usuarios
 
 Gestiona la autenticación y autorización:
 

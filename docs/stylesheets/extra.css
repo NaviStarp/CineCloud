@@ -69,7 +69,7 @@
 }
 /* Estilos adicionales personalizados */
 [data-md-color-scheme="default"] .md-header {
-  background-color: var(--color-primary-500) !important;
+  background-color: var(--color-primary-600) !important;
   color: white;
   box-shadow: 0 0 0.2rem rgba(0, 0, 0, .1), 0 0.2rem 0.4rem rgba(0, 0, 0, .2);
 }
@@ -174,7 +174,7 @@
 }
 
 [data-md-color-scheme="default"] .md-tabs {
-  background-color: var(--color-primary-400);
+  background-color: var(--color-primary-600);
   color: white;
 }
 

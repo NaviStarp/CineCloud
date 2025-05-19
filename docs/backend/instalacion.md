@@ -76,33 +76,6 @@ source .venv/bin/activate
 uvicorn --host 0.0.0.0 --port 8000 cinecloud.asgi:application
 ```
 
-### Configuración con Nginx
-
-Para una configuración de producción óptima, se recomienda utilizar Nginx como proxy inverso:
-
-```nginx
-server {
-    listen 80;
-    server_name tudominio.com;
-
-    location /static/ {
-        alias /ruta/a/CineCloud-backend/static/;
-    }
-
-    location /media/ {
-        alias /ruta/a/CineCloud-backend/media/;
-    }
-
-    location / {
-        proxy_pass http://127.0.0.1:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-```
-
 ## Inicio Automático (Linux)
 
 El proyecto incluye un script para iniciar automáticamente la aplicación en sistemas Linux:
@@ -119,16 +92,26 @@ Este script:
 4. Inicia el servidor con Uvicorn
 
 ## Variables de Entorno
-
 Las siguientes variables de entorno pueden ser configuradas para personalizar la instalación:
 
-| Variable | Descripción | Valor por defecto |
-|----------|-------------|-------------------|
-| `DJANGO_SECRET_KEY` | Clave secreta para la aplicación | `''` (generada automáticamente) |
-| `DEBUG` | Modo de depuración | `False` |
-| `DATABASE_URL` | URL de conexión a la base de datos | `postgresql://postgres:postgres@db:5432/cinecloud` |
-| `ALLOWED_HOSTS` | Hosts permitidos | `localhost,127.0.0.1` |
-| `CORS_ALLOWED_ORIGINS` | Orígenes permitidos para CORS | `http://localhost:4200` |
+| Variable               | Descripción                                      | Valor por defecto                          |
+|------------------------|--------------------------------------------------|--------------------------------------------|
+| `DJANGO_SECRET_KEY`    | Clave secreta para la aplicación                 | `clave-supersecreta-docker`                |
+| `DEBUG`                | Modo de depuración                               | `False`                                    |
+| `ALLOWED_HOSTS`        | Hosts permitidos                                 | `web,localhost,127.0.0.1`                  |
+| `CORS_ALLOW_ALL_ORIGINS` | Permitir todos los orígenes para CORS          | `True`                                     |
+| `CORS_ALLOWED_ORIGINS` | Orígenes permitidos para CORS                    | `http://localhost:4200`                    |
+| `CSRF_TRUSTED_ORIGINS` | Orígenes confiables para CSRF                    | `http://localhost:4200`                    |
+| `DATABASE_URL`         | URL de conexión a la base de datos              | `postgresql://admin:secret_password@db:5432/bd` |
+| `POSTGRES_DB`          | Nombre de la base de datos                      | `bd`                                       |
+| `POSTGRES_USER`        | Usuario de la base de datos                     | `admin`                                    |
+| `POSTGRES_PASSWORD`    | Contraseña de la base de datos                  | `secret_password`                          |
+| `POSTGRES_HOST`        | Host de la base de datos                        | `db`                                       |
+| `POSTGRES_PORT`        | Puerto de la base de datos                      | `5432`                                     |
+| `REDIS_HOST`           | Host del servidor Redis                         | `redis`                                    |
+| `REDIS_PORT`           | Puerto del servidor Redis                       | `6379`                                     |
+| `CELERY_BROKER_URL`    | URL del broker para Celery                      | `redis://redis:6379/0`                     |
+| `CELERY_RESULT_BACKEND`| Backend de resultados para Celery               | `redis://redis:6379/0`                     |
 
 ## Recomendaciones para producción
 
