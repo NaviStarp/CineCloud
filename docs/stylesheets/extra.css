@@ -41,11 +41,11 @@
   --md-primary-fg-color: var(--color-primary-600);
   --md-primary-fg-color--light: var(--color-primary-400);
   --md-primary-fg-color--dark: var(--color-primary-800);
-  --md-accent-fg-color: var(--color-accent-600);
-  --md-accent-fg-color--transparent: rgba(219, 39, 119, 0.1);
+  --md-accent-fg-color: var(--color-primary-600);
+  --md-accent-fg-color--transparent: rgba(109, 40, 217, 0.1);
   
   /* Colores de fondo */
-  --md-default-bg-color: var(--color-neutral-50);
+  --md-default-bg-color: white;
   
   /* Colores de texto */
   --md-typeset-color: var(--color-neutral-900);
