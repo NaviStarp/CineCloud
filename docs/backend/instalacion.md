@@ -19,8 +19,12 @@ Esta guía te ayudará a instalar el backend de **Cinecloud** fácilmente, ya se
    git clone https://github.com/NaviStarp/CineCloud-backend.git
    cd CineCloud-backend
    ```
+2. Configura las variables de entorno en el archivo .env y .env.docker:
+   ```bash
+   USE_DOCKER=yes # <----- IMPORTANTE PARA QUE SE USEN lAS VARIABLES DE ENTORNO DE DOCKER
+   ```
 
-2. Inicia los servicios con Docker:
+3. Inicia los servicios con Docker:
    ```bash
    docker-compose up
    ```
@@ -29,11 +33,11 @@ Esta guía te ayudará a instalar el backend de **Cinecloud** fácilmente, ya se
    docker-compose up -d
    ```
 
-3. Verifica que todo esté corriendo:
+4. Verifica que todo esté corriendo:
    ```bash
    docker ps
    ```
-4. En caso de que el usuario administrador no exista puedes crear uno 
+5. En caso de que el usuario administrador no exista puedes crear uno 
 ```bash
 docker compose exec app python manage.py createsuperuser
 ```
@@ -69,8 +73,8 @@ docker compose exec app python manage.py createsuperuser
    ```bash
    pip install -r requirements.txt
    ```
-
-4. Configura tu base de datos PostgreSQL editando el archivo `.env` según tus necesidades.  
+3. 
+4. Configura tu base de datos PostgreSQL editando el archivo `.env.local` según tus necesidades.  
    > **Nota:** Aunque no es obligatorio para el despliegue, se recomienda encarecidamente cambiar las contraseñas predeterminadas por razones de seguridad.
 
 5. Inicia la base de datos:
@@ -84,8 +88,12 @@ docker compose exec app python manage.py createsuperuser
    ```bash
    python manage.py migrate
    ```
+7. Crea el usuario administrador:
+   ```bash
+   python manage.py create_admin
+   ```
 
-7. Inicia el servidor:
+8. Inicia el servidor:
 
    > Para desarrollo:
      ```bash
