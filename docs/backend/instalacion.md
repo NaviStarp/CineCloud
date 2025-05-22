@@ -33,7 +33,10 @@ Esta guía te ayudará a instalar el backend de **Cinecloud** fácilmente, ya se
    ```bash
    docker ps
    ```
-
+4. En caso de que el usuario administrador no exista puedes crear uno 
+```bash
+docker compose exec app python manage.py createsuperuser
+```
 📍 Accede a la app en tu navegador:  
 👉 `http://localhost:8000/`
 
