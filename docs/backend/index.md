@@ -30,7 +30,6 @@ Antes de comenzar con la instalación, asegúrate de tener instalado:
 
 - Python (v3.8 o superior)
 - Docker y Docker Compose
-- FFmpeg (para procesamiento de video)
 - Entorno virtual de Python (recomendado)
 
 ## Siguientes pasos

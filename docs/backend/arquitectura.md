@@ -99,6 +99,22 @@ El streaming de video utiliza HTTP Live Streaming (HLS) para proporcionar reprod
 4. Se crea un archivo de manifiesto (.m3u8) que enumera los segmentos
 5. El cliente solicita el manifiesto y reproduce los segmentos adecuados según su ancho de banda
 
+```mermaid
+sequenceDiagram
+    participant Cliente
+    participant Servidor
+    participant FFmpeg
+    participant Almacenamiento
+    Cliente->>Servidor: Solicita un video
+    Servidor->>FFmpeg: Procesa el video original
+    FFmpeg-->>Servidor: Genera múltiples resoluciones y segmentos (.ts)
+    Servidor->>Almacenamiento: Guarda los segmentos y manifiesto (.m3u8)
+    Cliente->>Servidor: Solicita el archivo manifiesto (.m3u8)
+    Servidor-->>Cliente: Envía el archivo manifiesto
+    Cliente->>Servidor: Solicita los segmentos adecuados (.ts)
+    Servidor-->>Cliente: Envía los segmentos para reproducción
+```
+
 ## Diagrama de arquitectura
 
 ```mermaid

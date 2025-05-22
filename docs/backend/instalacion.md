@@ -1,84 +1,103 @@
-# Instalación del Backend
+# 📦 Guía Rápida de Instalación – Backend Cinecloud
 
-Esta guía detalla los diferentes métodos para instalar el backend de Cinecloud en entornos de desarrollo y producción.
+Esta guía te ayudará a instalar el backend de **Cinecloud** fácilmente, ya sea en **Linux** o **Windows**, para desarrollo o producción.
 
-## Instalación con Docker (Recomendado)
+---
 
-Docker permite una configuración rápida y consistente del entorno de Cinecloud.
+## 🚀 Opción 1: Instalación con Docker (Recomendada)
 
-### Requisitos previos
+### ✅ Requisitos
 
-- Docker y Docker Compose instalados
-- Clonar el repositorio: `git clone https://github.com/NaviStarp/CineCloud-backend.git`
+- Tener **Docker** y **Docker Compose** instalados.  
+  - [Instalar Docker en Linux](https://docs.docker.com/engine/install/)
+  - [Instalar Docker Desktop en Windows](https://docs.docker.com/desktop/install/windows-install/)
 
-### Pasos para la instalación
+### 🔧 Pasos
 
-1. Navega al directorio del proyecto:
+1. Clona el repositorio:
    ```bash
+   git clone https://github.com/NaviStarp/CineCloud-backend.git
    cd CineCloud-backend
    ```
 
-2. Ejecuta Docker Compose:
+2. Inicia los servicios con Docker:
    ```bash
    docker-compose up
    ```
-
-   Para ejecutar en segundo plano:
+   O en segundo plano:
    ```bash
    docker-compose up -d
    ```
 
-3. Verifica que los contenedores estén funcionando:
+3. Verifica que todo esté corriendo:
    ```bash
    docker ps
    ```
 
-La aplicación estará disponible en `http://localhost:8000/`.
+📍 Accede a la app en tu navegador:  
+👉 `http://localhost:8000/`
 
-### Configuración de Docker
+---
 
-El archivo `docker-compose.yml` incluye:
+## ⚙️ Opción 2: Instalación Manual (sin Docker)
 
-- Servicio de base de datos PostgreSQL
-- Servicio web para la aplicación Django
-- Configuración de variables de entorno
-- Mapeo de puertos y volúmenes
+### ✅ Requisitos
 
-Para personalizar la configuración, edita los archivos `Dockerfile` y `docker-compose.yml`.
+- Tener Python 3.10+ instalado
+- Tener PostgreSQL (si no usas Docker para la base de datos)
+- Redis (opcional para tareas con Celery)
 
-## Servidor de Desarrollo
+### 🔧 Pasos en Linux o WSL (Windows)
 
-Para entornos de desarrollo o pruebas rápidas:
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/NaviStarp/CineCloud-backend.git
+   cd CineCloud-backend
+   ```
 
-```bash
-# Activar entorno virtual
-source .venv/bin/activate
+2. Crea y activa un entorno virtual:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate      # Linux o WSL
+   .venv\Scripts\activate         # Windows CMD/PowerShell
+   ```
 
-# Iniciar servidor de desarrollo
-python manage.py runserver
-```
+3. Instala las dependencias:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Para especificar un puerto diferente:
+4. Configura tu base de datos PostgreSQL editando el archivo `.env` según tus necesidades.  
+   > **Nota:** Aunque no es obligatorio para el despliegue, se recomienda encarecidamente cambiar las contraseñas predeterminadas por razones de seguridad.
 
-```bash
-python manage.py runserver 8001
-```
+5. Inicia la base de datos:
+   ```bash
+   cd database
+   docker-compose up -d # Puede que necesites usar sudo en Linux
+   cd ..
+   ```
 
-## Servidor de Producción
+6. Aplica las migraciones:
+   ```bash
+   python manage.py migrate
+   ```
 
-Para entornos de producción se recomienda utilizar Uvicorn como servidor ASGI:
+7. Inicia el servidor:
 
-```bash
-# Activar entorno virtual
-source .venv/bin/activate
+   > Para desarrollo:
+     ```bash
+     python manage.py runserver
+     ```
 
-# Iniciar servidor de producción
-uvicorn --host 0.0.0.0 --port 8000 cinecloud.asgi:application
-```
+   > Para producción (Recomendado):
+     ```bash
+     uvicorn --host 0.0.0.0 --port 8000 cinecloud.asgi:application
+     ```
 
-## Inicio Automático (Linux)
 
-El proyecto incluye un script para iniciar automáticamente la aplicación en sistemas Linux:
+## 🤖 Inicio Automático (Linux)
+
+Si usas Linux, puedes arrancar todo automáticamente con:
 
 ```bash
 chmod +x start.sh
@@ -86,50 +105,41 @@ chmod +x start.sh
 ```
 
 Este script:
-1. Activa el entorno virtual
-2. Verifica que la base de datos esté en funcionamiento
-3. Aplica migraciones pendientes
-4. Inicia el servidor con Uvicorn
+- Activa el entorno virtual
+- Inicia Docker (base de datos)
+- Aplica migraciones
+- Lanza Uvicorn
+> Nota: Este código requiere que el entorno virtual esté creado y que las dependencias necesarias estén instaladas.
+Asegúrate de haber configurado el entorno virtual utilizando herramientas como `venv` o `virtualenv` y de haber
+instalado las dependencias especificadas en el archivo `requirements.txt` antes de ejecutar el código.
+---
 
-## Variables de Entorno
-Las siguientes variables de entorno pueden ser configuradas para personalizar la instalación:
+## ⚙️ Variables de Entorno
 
-| Variable               | Descripción                                      | Valor por defecto                          |
-|------------------------|--------------------------------------------------|--------------------------------------------|
-| `DJANGO_SECRET_KEY`    | Clave secreta para la aplicación                 | `clave-supersecreta-docker`                |
-| `DEBUG`                | Modo de depuración                               | `False`                                    |
-| `ALLOWED_HOSTS`        | Hosts permitidos                                 | `web,localhost,127.0.0.1`                  |
-| `CORS_ALLOW_ALL_ORIGINS` | Permitir todos los orígenes para CORS          | `True`                                     |
-| `CORS_ALLOWED_ORIGINS` | Orígenes permitidos para CORS                    | `http://localhost:4200`                    |
-| `CSRF_TRUSTED_ORIGINS` | Orígenes confiables para CSRF                    | `http://localhost:4200`                    |
-| `DATABASE_URL`         | URL de conexión a la base de datos              | `postgresql://admin:secret_password@db:5432/bd` |
-| `POSTGRES_DB`          | Nombre de la base de datos                      | `bd`                                       |
-| `POSTGRES_USER`        | Usuario de la base de datos                     | `admin`                                    |
-| `POSTGRES_PASSWORD`    | Contraseña de la base de datos                  | `secret_password`                          |
-| `POSTGRES_HOST`        | Host de la base de datos                        | `db`                                       |
-| `POSTGRES_PORT`        | Puerto de la base de datos                      | `5432`                                     |
-| `REDIS_HOST`           | Host del servidor Redis                         | `redis`                                    |
-| `REDIS_PORT`           | Puerto del servidor Redis                       | `6379`                                     |
-| `CELERY_BROKER_URL`    | URL del broker para Celery                      | `redis://redis:6379/0`                     |
-| `CELERY_RESULT_BACKEND`| Backend de resultados para Celery               | `redis://redis:6379/0`                     |
+Configura estas variables (en `.env`):
 
-## Recomendaciones para producción
+| Variable                      | Descripción                        | Valor por defecto              |
+|------------------------------|------------------------------------|-------------------------------|
+| `DJANGO_SECRET_KEY`          | Clave secreta de Django            | `clave-supersecreta-docker`  |
+| `DJANGO_DEBUG`               | Modo de depuración (`True/False`)  | `False`                       |
+| `DJANGO_ALLOWED_HOSTS`       | Hosts permitidos                   | `web,localhost,127.0.0.1`     |
+| `CORS_ALLOW_ALL_ORIGINS`     | Permitir todos los orígenes CORS   | `True`                        |
+| `CORS_ALLOWED_ORIGINS`       | Orígenes permitidos CORS           | `http://localhost:4200`       |
+| `CSRF_TRUSTED_ORIGINS`       | Orígenes confiables para CSRF      | `http://localhost:4200`       |
+| `POSTGRES_DB`                | Nombre de la BD                    | `bd`                          |
+| `POSTGRES_USER`              | Usuario de BD                      | `admin`                       |
+| `POSTGRES_PASSWORD`          | Contraseña de BD                   | `secret_password`             |
+| `POSTGRES_HOST`              | Host de la BD                      | `db`                          |
+| `POSTGRES_PORT`              | Puerto de la BD                    | `5432`                        |
+| `REDIS_HOST`                 | Host Redis                         | `redis`                       |
+| `REDIS_PORT`                 | Puerto Redis                       | `6379`                        |
+| `CELERY_BROKER_URL`          | URL de Celery                      | `redis://redis:6379/0`        |
+| `CELERY_RESULT_BACKEND`      | Backend de resultados de Celery    | `redis://redis:6379/0`        |
+| `DJANGO_SUPERUSER_USERNAME`  | Usuario del superusuario Django    | `admin`                       |
+| `DJANGO_SUPERUSER_PASSWORD`  | Contraseña del superusuario Django | `admin`                       |
 
-1. **Asegura los secretos**: No almacenes claves secretas en el repositorio
-2. **Configura HTTPS**: Utiliza certificados SSL para conexiones seguras
-3. **Monitoreo**: Implementa herramientas como Prometheus o Grafana
-4. **Copias de seguridad**: Configura respaldos automáticos de la base de datos
-5. **Logs**: Centraliza y monitorea los registros de la aplicación
+---
 
-## Escalabilidad
+## 📘 Más Información
 
-Para escalar horizontalmente:
-
-1. Utiliza un balanceador de carga (como HAProxy o Nginx)
-2. Configura múltiples instancias del servidor
-3. Utiliza una base de datos compartida o replicada
-4. Considera servicios de almacenamiento compartido para archivos multimedia
-
-## Siguientes pasos
-
-- [Arquitectura](architecture.md): Comprende la estructura del proyecto
+- [📐 Arquitectura del Proyecto](arquitectura.md)
