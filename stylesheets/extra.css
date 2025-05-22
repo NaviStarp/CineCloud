@@ -1,0 +1,210 @@
+
+:root {
+  /* Tonos primarios - Púrpura */
+  --color-primary-50: #f5f3ff;
+  --color-primary-100: #ede9fe;
+  --color-primary-200: #ddd6fe;
+  --color-primary-300: #c4b5fd;
+  --color-primary-400: #a78bfa;
+  --color-primary-500: #8b5cf6;
+  --color-primary-600: #7c3aed;
+  --color-primary-700: #6d28d9;
+  --color-primary-800: #5b21b6;
+  --color-primary-900: #4c1d95;
+  
+  /* Tonos acentos - Rosa */
+  --color-accent-50: #fdf2f8;
+  --color-accent-100: #fce7f3;
+  --color-accent-200: #fbcfe8;
+  --color-accent-300: #f9a8d4;
+  --color-accent-400: #f472b6;
+  --color-accent-500: #ec4899;
+  --color-accent-600: #db2777;
+  --color-accent-700: #be185d;
+  --color-accent-800: #9d174d;
+  --color-accent-900: #831843;
+  
+  /* Tonos neutrales - Oscuro */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+}
+/* Aplicación de colores personalizados al tema Material */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: var(--color-primary-600);
+  --md-primary-fg-color--light: var(--color-primary-400);
+  --md-primary-fg-color--dark: var(--color-primary-800);
+  --md-accent-fg-color: var(--color-primary-600);
+  --md-accent-fg-color--transparent: rgba(109, 40, 217, 0.1);
+  
+  /* Colores de fondo */
+  --md-default-bg-color: white;
+  
+  /* Colores de texto */
+  --md-typeset-color: var(--color-neutral-900);
+  --md-typeset-a-color: var(--color-primary-700);
+}
+/* Tema oscuro */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: var(--color-primary-600);
+  --md-primary-fg-color--light: var(--color-primary-400);
+  --md-primary-fg-color--dark: var(--color-primary-800);
+  --md-accent-fg-color: var(--color-accent-400);
+  --md-accent-fg-color--transparent: rgba(244, 114, 182, 0.1);
+  
+  /* Colores de fondo */
+  --md-default-bg-color: var(--color-neutral-900);
+  --md-default-bg-color--light: var(--color-neutral-800);
+  
+  /* Colores de texto */
+  --md-typeset-color: var(--color-neutral-100);
+  --md-typeset-a-color: var(--color-primary-300);
+}
+/* Estilos adicionales personalizados */
+[data-md-color-scheme="default"] .md-header {
+  background-color: var(--color-primary-600) !important;
+  color: white;
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, .1), 0 0.2rem 0.4rem rgba(0, 0, 0, .2);
+}
+
+[data-md-color-scheme="slate"] .md-header {
+  background-color: var(--color-neutral-900) !important;
+  color: white;
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, .1), 0 0.2rem 0.4rem rgba(0, 0, 0, .2);
+}
+
+.md-main__inner {
+  margin-top: 1.5rem;
+}
+.md-typeset h1 {
+  color: var(--color-primary-700);
+  font-weight: 700;
+}
+.md-typeset h2 {
+  color: var(--color-primary-600);
+  font-weight: 600;
+}
+.md-typeset h3 {
+  color: var(--color-primary-500);
+}
+/* Estilos para bloques de código */
+.md-typeset pre {
+  border-radius: 0.4rem;
+}
+/* Estilos para admonitions */
+.md-typeset .admonition, 
+.md-typeset details {
+  border-radius: 0.4rem;
+}
+/* Estilo para botones */
+.md-button {
+  border-radius: 0.3rem;
+  transition: all 0.2s ease-in-out;
+}
+.md-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Estilos para navegación */
+.md-nav__item .md-nav__link--active {
+  color: var(--color-primary-600);
+  font-weight: 600;
+}
+.md-nav__item .md-nav__link:hover {
+  color: var(--color-primary-500);
+}
+/* Animación para los enlaces */
+.md-typeset a {
+  transition: color 0.2s ease-in-out;
+}
+/* Estilo para tablas */
+.md-typeset table:not([class]) {
+  border-radius: 0.4rem;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 3px 1px -2px rgba(0,0,0,.2);
+  overflow: hidden;
+}
+.md-typeset table:not([class]) th {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-900);
+}
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: var(--color-primary-900);
+  color: var(--color-primary-100);
+}
+
+/* Efecto hover para tarjetas */
+.md-typeset .admonition, 
+.md-typeset details {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.md-typeset .admonition:hover, 
+.md-typeset details:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+/* Estilo para la barra de búsqueda */
+.md-search__inner {
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+.md-search__input {
+  background-color: rgba(255,255,255,0.1);
+  transition: background-color 0.2s ease;
+}
+.md-search__input:focus {
+  background-color: rgba(255,255,255,0.15);
+}
+
+/* Personalización de admonitions */
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-left-color: var(--color-primary-400);
+}
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-left-color: var(--color-accent-400);
+}
+
+[data-md-color-scheme="default"] .md-tabs {
+  background-color: var(--color-primary-600);
+  color: white;
+}
+
+[data-md-color-scheme="slate"] .md-tabs {
+  background-color: var(--color-neutral-700);
+  color: white;
+}
+
+/* Estilo para footer */
+.md-footer {
+  background-color: var(--color-neutral-900);
+}
+.md-footer-meta {
+  background-color: var(--color-neutral-800);
+}
+
+/* Mejoras para legibilidad en código */
+.md-typeset code {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-800);
+  border-radius: 0.2rem;
+  padding: 0.1rem 0.3rem;
+}
+[data-md-color-scheme="slate"] .md-typeset code {
+  background-color: rgba(124, 58, 237, 0.1);
+  color: var(--color-primary-300);
+}
+
+/* Estilo para menú de navegación móvil */
+.md-nav--primary .md-nav__title {
+  background-color: var(--color-primary-700);
+  color: white;
+}
